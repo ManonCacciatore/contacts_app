@@ -10,7 +10,7 @@ export default class Contact {
     this.created_at = data.created_at;
   }
   render(el) {
-    const template = document.createElement('div');
+    const template = document.createElement('tr');
     template.innerHTML = getTemplate(this);
     el.append(template);
 
