@@ -15,8 +15,21 @@ export default class ContactList {
     this.contacts = contacts.map(contact => new Contact(contact));
     this.render()
   }
+
+  getContactsCount() {
+    return this.contacts.length
+  }
+
+  renderContactsCount() {
+    this.domElt.querySelector(".contact-count").innerText = this.getContactsCount()
+  }
+
   render() {
     this.domElt.innerHTML = getTemplate();
     this.contacts.forEach(contact => contact.render(this.domElt.querySelector(".contacts-table tbody")));
+
+    this.renderContactsCount()
   }
+
+  
 }
