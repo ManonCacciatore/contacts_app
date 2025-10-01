@@ -1,6 +1,5 @@
 import getTemplate from "../contact/template";
 
-
 export default class Contact {
   constructor(data) {
     this.id = data.id;
@@ -9,10 +8,18 @@ export default class Contact {
     this.email = data.email;
     this.created_at = data.created_at;
   }
+
   render(el) {
     const template = document.createElement('tr');
     template.innerHTML = getTemplate(this);
-    el.append(template);
 
+    const btnEdit = template.querySelector(".btn-edit");
+
+    if (btnEdit) {
+      btnEdit.addEventListener("click", () => {
+        template.classList.toggle("isEditing");
+      });
+    }
+    el.append(template);
   }
 }
