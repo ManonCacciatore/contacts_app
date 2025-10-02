@@ -10,16 +10,32 @@ export default class Contact {
   }
 
   render(el) {
-    const template = document.createElement('tr');
-    template.innerHTML = getTemplate(this);
+  const template = document.createElement("tr");
+  template.innerHTML = getTemplate(this);
 
-    const btnEdit = template.querySelector(".btn-edit");
+  this.domElt = template; 
 
-    if (btnEdit) {
-      btnEdit.addEventListener("click", () => {
-        template.classList.toggle("isEditing");
-      });
-    }
-    el.append(template);
-  }
+  el.append(this.domElt);
+
+  this.initEvents();
 }
+
+initEvents() {
+  
+  this.domElt.querySelector(".btn-edit")
+    .addEventListener("click", () => {
+      this.domElt.classList.toggle("isEditing");
+    });
+
+  this.domElt.querySelector(".btn-delete")
+    .addEventListener("click", (e) => {
+      window.ContactList.deleteOneById(this.id);
+      this.domElt.remove()
+
+    });
+
+  this.domElt.querySelector(".btn-check")
+    .addEventListener("click", () => {
+      alert("Validation !");
+    });
+}}

@@ -8,6 +8,7 @@ export default class ContactList {
     this.domElt = document.querySelector(data.el);
     DB.setApiURL(data.apiURL);
     this.contacts = [];
+    window.ContactList = this;
     this.loadContacts();
   }
   async loadContacts() {
@@ -43,6 +44,18 @@ export default class ContactList {
     // Ajouter dans le DOM
     newContact.render(this.domElt.querySelector('.contacts-table tbody'))
 
+    // Relancer le renderContactsCount
+    this.renderContactsCount()
+  }
+
+  async deleteOneById(id) {
+    // Supprimer de la DB
+    const resp = await DB.deleteOneById(id);
+    // Supprimer des contacts
+
+    this.contacts.splice(this.contacts.findIndex((contact) => contact.id === id), 1)
+
+    // Supprimer dans le DOM (-> fait dans la Contact.js)
     // Relancer le renderContactsCount
     this.renderContactsCount()
   }
