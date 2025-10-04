@@ -11,6 +11,7 @@ export default class ContactList {
     window.ContactList = this;
     this.loadContacts();
   }
+
   async loadContacts() {
     const contacts = await DB.findAll();
     this.contacts = contacts.map(contact => new Contact(contact));
@@ -51,8 +52,8 @@ export default class ContactList {
   async deleteOneById(id) {
     // Supprimer de la DB
     const resp = await DB.deleteOneById(id);
+    
     // Supprimer des contacts
-
     this.contacts.splice(this.contacts.findIndex((contact) => contact.id === id), 1)
 
     // Supprimer dans le DOM (-> fait dans la Contact.js)

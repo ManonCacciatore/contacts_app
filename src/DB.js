@@ -28,4 +28,13 @@ export default class DB {
     });
     return response.json();
   }
+
+  static async updateOneById(id, data) {
+  const response = await fetch(this.apiURL + "contacts/" + id, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  });
+  return response.json();
+  }
 }
